@@ -54,7 +54,7 @@ readonly class TicketService
     {
         $ticket = $this->entityManager->getRepository(Ticket::class)->find($ticketId);
 
-        $this->stateMachine->transitionTo(new Sold($ticket, $this->bus));
+        $this->stateMachine->transitionTo(new Sold($ticket));
 
         return $ticket;
     }

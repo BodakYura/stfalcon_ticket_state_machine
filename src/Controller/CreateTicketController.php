@@ -15,7 +15,7 @@ class CreateTicketController extends AbstractController
         '/create-ticket/',
         name: 'create_ticket',
         methods: [
-            Request::METHOD_POST,
+            Request::METHOD_GET,
         ]
     )]
     public function __invoke(Request $request, TicketService $ticketService, SerializerInterface $serializer): JsonResponse
