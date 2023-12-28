@@ -8,14 +8,12 @@ use App\State\Lock;
 use App\State\Sold;
 use App\State\TicketStateMachine;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 readonly class TicketService
 {
     public function __construct(
         private TicketStateMachine     $stateMachine,
         private EntityManagerInterface $entityManager,
-        private MessageBusInterface    $bus
     ) {
     }
 
@@ -32,6 +30,9 @@ readonly class TicketService
         return $ticket;
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function available(int $ticketId): Ticket
     {
         $ticket = $this->entityManager->getRepository(Ticket::class)->find($ticketId);
@@ -41,6 +42,9 @@ readonly class TicketService
         return $ticket;
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function lock(int $ticketId): Ticket
     {
         $ticket = $this->entityManager->getRepository(Ticket::class)->find($ticketId);
@@ -50,6 +54,9 @@ readonly class TicketService
         return $ticket;
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function sale(int $ticketId): Ticket
     {
         $ticket = $this->entityManager->getRepository(Ticket::class)->find($ticketId);
@@ -59,6 +66,9 @@ readonly class TicketService
         return $ticket;
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function return(int $ticketId): Ticket
     {
         $ticket = $this->entityManager->getRepository(Ticket::class)->find($ticketId);
