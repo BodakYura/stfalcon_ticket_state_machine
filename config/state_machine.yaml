@@ -1,0 +1,15 @@
+parameters:
+      ticket_state_machine:
+        states:
+          created:
+            from: [],
+            to: ['available']
+          available:
+            from: ['created', 'sold', 'lock'],
+            to: ['lock']
+          lock:
+            from: ['available']
+            to: ['sold', 'available']
+          sold:
+            from: ['lock']
+            to: ['available']

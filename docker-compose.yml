@@ -1,0 +1,54 @@
+services:
+  ##> NGINX ###
+  nginx:
+    container_name: "nginx-container"
+    image: nginx:${NGINX_VERSION}
+    volumes:
+      - .:/var/www
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./docker/logs:/var/log
+    ports:
+      - ${NGINX_PORT}:80
+    depends_on:
+      - php
+      - db
+    networks:
+      - dev
+
+  ##> PHP ###
+  php:
+    container_name: "php-container"
+    build:
+      context: ./docker/php
+      args:
+        PHP_VERSION: ${PHP_VERSION}
+    volumes:
+      - ./:/var/www
+    env_file:
+      - ./.env
+    networks:
+      - dev
+    depends_on:
+      - db
+
+  ##> database/mariadb ###
+  db:
+    container_name: mariadb-container
+    image: mariadb:${MARIADB_VERSION}
+    restart: unless-stopped
+    tty: true
+    environment:
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_USER: ${MARIADB_USER}
+    ports:
+      - 33061:${DATABASE_PORT}
+    volumes:
+      - ./docker/mariadb/dbdata:/var/lib/mysql
+    networks:
+      - dev
+
+networks:
+  dev:
+    driver: bridge
