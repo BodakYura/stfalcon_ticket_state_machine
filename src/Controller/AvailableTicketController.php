@@ -15,7 +15,7 @@ class AvailableTicketController extends AbstractController
         '/available-ticket/{id}',
         name: 'available_ticket',
         methods: [
-            Request::METHOD_POST,
+            Request::METHOD_GET,
         ]
     )]
     public function __invoke(Request $request, int $id, TicketService $ticketService, SerializerInterface $serializer): JsonResponse
