@@ -27,7 +27,7 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen && \
     locale-gen
 
-COPY ./php.ini /usr/local/etc/php/conf.d/
+COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 CMD composer install ; setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var ; setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var ; php-fpm
