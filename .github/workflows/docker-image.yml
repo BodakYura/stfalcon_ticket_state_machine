@@ -12,7 +12,16 @@ jobs:
 
     runs-on: ubuntu-latest
 
+
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: bodakyuriy
+          password: dckr_pat_siks_ZXn0JPEc3bGBtQhqrc8cJI
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          file: ./docker/php/Dockerfile
+          push: true
+          tags: bodakyuriy/ticket-state-machine:latest
