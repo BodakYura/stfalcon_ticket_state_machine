@@ -25,4 +25,4 @@ jobs:
           context: ./docker/php/Dockerfile
           push: true
           target: final
-          tags: bodakyuriy/ticket-state-machine:$(date +%s)
+          tags: bodakyuriy/ticket-state-machine:latest
