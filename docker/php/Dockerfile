@@ -4,6 +4,8 @@ ENV PHP_OPCACHE_VALIDATE_TIMESTAMPS="0"
 
 COPY --from=mlocati/php-extension-installer  /usr/bin/install-php-extensions /usr/local/bin/
 
+COPY . /var/www
+
 RUN apt-get update \
     && apt-get -y upgrade \
     && apt-get install -y --no-install-recommends locales apt-utils git  \
