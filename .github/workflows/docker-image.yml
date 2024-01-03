@@ -22,8 +22,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: .
-          dockerfile: ./docker/php/Dockerfile
+          file: ./docker/php/Dockerfile
           push: true
           target: final
           tags: bodakyuriy/ticket-state-machine:latest
