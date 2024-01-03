@@ -24,5 +24,4 @@ jobs:
         with:
           file: ./docker/php/Dockerfile
           push: true
-          target: final
           tags: bodakyuriy/ticket-state-machine:latest
